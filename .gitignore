@@ -6,6 +6,23 @@ __pycache__/
 # C extensions
 *.so
 
+#non of my content
+*.mp4
+*.mkv
+*.flv
+*.avi
+*.mov
+*.wmv
+*.mp3
+*.wav
+*.flac
+*.aac
+*.ogg
+*.wma
+
+
+
+
 # Distribution / packaging
 .Python
 build/

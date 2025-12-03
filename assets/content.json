@@ -1,0 +1,22 @@
+{
+    "videos": [
+        {
+            "id": "1",
+            "title": "Berlin 2025",
+            "description": "Xgimi Berlin Trade Show - whats my name?",
+            "thumbnailUrl": "https://tv.dilly.cloud/content/berlin-640.jpg",
+            "videoUrl": "https://tv.dilly.cloud/content/berlin.mp4",
+            "duration": 3600,
+            "category": "Events"
+        },
+        {
+            "id": "2",
+            "title": "Halloween 2025",
+            "description": "Special 2025 Halloween fun",
+            "thumbnailUrl": "https://tv.dilly.cloud/content/halloween-640.jpg",
+            "videoUrl": "https://tv.dilly.cloud/content/halloween.mp4",
+            "duration": 3600,
+            "category": "Seasonal"
+        }
+    ]
+}

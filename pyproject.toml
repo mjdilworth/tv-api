@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "tv-api"
+version = "0.1.0"
+description = "API for PickleTV built with FastAPI"
+authors = ["PickleTV <dev@pickletv.local>"]
+packages = [
+    { include = "tv_api", from = "src" },
+]
+readme = "README.md"
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+fastapi = "^0.111.0"
+uvicorn = { extras = ["standard"], version = "^0.30.1" }
+pydantic-settings = "^2.5.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.2"
+pytest-asyncio = "^0.23.7"
+httpx = "^0.27.0"
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = [
+    "tests",
+]
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,13 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.env
+.venv
+.mypy_cache
+.pytest_cache
+.cache
+.git
+.gitignore
+Dockerfile
