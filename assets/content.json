@@ -5,18 +5,28 @@
             "title": "Berlin 2025",
             "description": "Xgimi Berlin Trade Show - whats my name?",
             "thumbnailUrl": "https://tv.dilly.cloud/content/berlin-640.jpg",
-            "videoUrl": "https://tv.dilly.cloud/content/berlin.mp4",
-            "duration": 3600,
+            "videoUrl": "https://tv.dilly.cloud/content/BerlinArt-b0.mp4",
+            "duration": 155,
             "category": "Events"
         },
         {
             "id": "2",
+            "title": "Alyeska 2025",
+            "description": "Alyeska Resort Winter 2025",
+            "thumbnailUrl": "https://tv.dilly.cloud/content/alyeska-640.jpg",
+            "videoUrl": "https://tv.dilly.cloud/content/Alyeska_visual-b0.mp4",
+            "duration": 91,
+            "category": "Events"
+        },
+        {
+            "id": "3",
             "title": "Halloween 2025",
             "description": "Special 2025 Halloween fun",
             "thumbnailUrl": "https://tv.dilly.cloud/content/halloween-640.jpg",
             "videoUrl": "https://tv.dilly.cloud/content/halloween.mp4",
-            "duration": 3600,
+            "duration": 140,
             "category": "Seasonal"
         }
+
     ]
 }

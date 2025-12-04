@@ -13,12 +13,14 @@ async def privacy_policy() -> dict[str, str]:
 
     settings = get_settings()
     policy = (
-        "We only process the information required to deliver purchased art shows."
-        " Email addresses are used to authenticate purchases, and any media streaming"
-        " activity stays on your device. No personal data is shared with third parties."
+        "Dilworth Creative LLC only processes the information required to deliver"
+        " purchased art shows. Email addresses are used strictly to authenticate"
+        " purchases, and any media streaming activity stays on your device. No"
+        " personal data is sold or shared with third parties."
     )
     return {
         "application": settings.app_name,
+        "owner": "Dilworth Creative LLC",
         "contact": "support@pickletv.local",
         "policy": policy,
     }

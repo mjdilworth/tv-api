@@ -71,3 +71,10 @@ The container leverages Poetry for dependency management and exposes port 8280.
 	`/content` endpoints expose whatever files exist there).
 - Override the source folder with `TV_API_ASSETS_DIR=/path/to/assets make run`
 	if your media lives elsewhere.
+
+## Asset creation
+
+to make a thumbnail from mp4 - the -ss is how many seconds in the grab the frame
+```
+ffmpeg -ss 5 -i berlin.mp4 -vframes 1 -q:v 2 -vf "scale=640:-2" berlin-640.jpg
+```
