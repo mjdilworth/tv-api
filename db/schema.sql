@@ -60,3 +60,41 @@ CREATE TABLE user_video_entitlements (
 CREATE INDEX idx_users_email_lower ON users (LOWER(email));
 CREATE INDEX idx_purchases_user ON user_art_purchases (user_id);
 CREATE INDEX idx_entitlements_user ON user_video_entitlements (user_id);
+
+-- Magic Link Authentication
+CREATE TABLE magic_links (
+    magic_link_id       UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    token               TEXT NOT NULL UNIQUE,
+    email               CITEXT NOT NULL,
+    device_id           TEXT NOT NULL,
+    device_model        TEXT,
+    device_manufacturer TEXT,
+    platform            TEXT,
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    expires_at          TIMESTAMPTZ NOT NULL,
+    used                BOOLEAN DEFAULT FALSE,
+    used_at             TIMESTAMPTZ
+);
+
+CREATE INDEX idx_magic_links_token ON magic_links(token);
+CREATE INDEX idx_magic_links_email ON magic_links(email);
+CREATE INDEX idx_magic_links_device_id ON magic_links(device_id);
+CREATE INDEX idx_magic_links_expires_at ON magic_links(expires_at) WHERE NOT used;
+
+-- User Content
+CREATE TABLE user_content (
+    content_id      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id         UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
+    title           TEXT NOT NULL,
+    description     TEXT,
+    video_filename  TEXT NOT NULL,
+    thumbnail_filename TEXT,
+    duration_secs   INTEGER,
+    file_size_bytes BIGINT,
+    is_public       BOOLEAN DEFAULT FALSE,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX idx_user_content_user_id ON user_content(user_id);
+CREATE INDEX idx_user_content_public ON user_content(is_public) WHERE is_public = TRUE;

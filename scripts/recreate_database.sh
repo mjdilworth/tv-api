@@ -98,6 +98,13 @@ SQL
 # Create tables and indexes.
 "${psql_db[@]}" -v schema_name="${TV_APP_SCHEMA}" -f "${SCHEMA_FILE}"
 
+# Grant permissions on magic_links table and any sequences.
+"${psql_db[@]}" <<SQL
+GRANT ALL PRIVILEGES ON TABLE ${TV_APP_SCHEMA}.magic_links TO ${TV_APP_USER};
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA ${TV_APP_SCHEMA} TO ${TV_APP_USER};
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA ${TV_APP_SCHEMA} TO ${TV_APP_USER};
+SQL
+
 echo "Database ${TV_DB_NAME} recreated."
 echo "Run db/seed.sql if you need sample data:"
 echo "  psql \"postgresql://${TV_APP_USER}:<PASSWORD>@${PGHOST}:${PGPORT}/${TV_DB_NAME}\" -f ${SEED_FILE}"

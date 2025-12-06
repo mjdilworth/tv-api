@@ -18,7 +18,31 @@ class Settings(BaseSettings):
     log_level: str = Field(default="INFO")
     assets_dir: Path = Field(default=DEFAULT_ASSETS_DIR)
 
-    model_config = SettingsConfigDict(env_prefix="TV_API_", case_sensitive=False)
+    # Database settings
+    database_url: str = Field(default="postgresql://postgres:postgres@localhost:5432/tv_api")
+    
+    # Email settings
+    smtp_host: str = Field(default="smtp.gmail.com")
+    smtp_port: int = Field(default=587)
+    smtp_username: str = Field(default="")
+    smtp_password: str = Field(default="")
+    smtp_from_email: str = Field(default="noreply@dilly.cloud")
+    smtp_from_name: str = Field(default="dil.map")
+    
+    # Magic link settings
+    magic_link_base_url: str = Field(default="https://tv.dilly.cloud/auth/verify")
+    magic_link_expiry_minutes: int = Field(default=15)
+    
+    # Rate limiting
+    rate_limit_per_email_per_hour: int = Field(default=3)
+    rate_limit_per_ip_per_hour: int = Field(default=10)
+
+    model_config = SettingsConfigDict(
+        env_prefix="TV_API_", 
+        case_sensitive=False,
+        env_file=str(PROJECT_ROOT / ".env"),
+        env_file_encoding="utf-8",
+    )
 
 
 @lru_cache

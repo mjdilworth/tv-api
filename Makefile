@@ -13,6 +13,8 @@ install:
 	poetry install --with dev
 
 run:
+	@export TV_API_DATABASE_URL="postgresql://tv_api_app:dilly@localhost:5432/tv_dbase" && \
+	cd $(shell pwd) && \
 	poetry run uvicorn tv_api.main:app --host 0.0.0.0 --port 8280 --reload
 
 test:

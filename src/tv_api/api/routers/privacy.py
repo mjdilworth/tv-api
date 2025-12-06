@@ -21,6 +21,6 @@ async def privacy_policy() -> dict[str, str]:
     return {
         "application": settings.app_name,
         "owner": "Dilworth Creative LLC",
-        "contact": "support@pickletv.local",
+        "contact": "hello@lucindadilworth.com",
         "policy": policy,
     }
