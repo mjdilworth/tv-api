@@ -32,6 +32,10 @@ if [[ -z "$ORIG_BITRATE" || "$ORIG_BITRATE" == "N/A" ]]; then
         -preset slower \
         -crf 18 \
         -bf 0 \
+        -profile:v high \
+        -level:v 5.1 \
+        -pix_fmt yuv420p \
+        -x264-params "level=5.1:vbv-maxrate=44000:vbv-bufsize=88000" \
         -c:a copy \
         "$OUTPUT"
 else
@@ -46,6 +50,10 @@ else
         -preset slower \
         -b:v "${TARGET_BITRATE}k" \
         -bf 0 \
+        -profile:v high \
+        -level:v 5.1 \
+        -pix_fmt yuv420p \
+        -x264-params "level=5.1:vbv-maxrate=44000:vbv-bufsize=88000" \
         -pass 1 \
         -an \
         -f null /dev/null
@@ -57,6 +65,10 @@ else
         -preset slower \
         -b:v "${TARGET_BITRATE}k" \
         -bf 0 \
+        -profile:v high \
+        -level:v 5.1 \
+        -pix_fmt yuv420p \
+        -x264-params "level=5.1:vbv-maxrate=44000:vbv-bufsize=88000" \
         -pass 2 \
         -c:a copy \
         "$OUTPUT"
