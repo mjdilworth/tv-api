@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "tv-api"
 version = "0.1.0"
-description = "API for PickleTV built with FastAPI"
-authors = ["PickleTV <dev@pickletv.local>"]
+description = "API for dil.map built with FastAPI"
+authors = ["dil.map <mike@dilly.cloud>"]
 packages = [
     { include = "tv_api", from = "src" },
 ]

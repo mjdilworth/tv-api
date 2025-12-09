@@ -13,7 +13,7 @@ DEFAULT_ASSETS_DIR = PROJECT_ROOT / "assets"
 class Settings(BaseSettings):
     """Runtime configuration read from environment variables."""
 
-    app_name: str = Field(default="PickleTV API")
+    app_name: str = Field(default="dil.map")
     environment: str = Field(default="local")
     log_level: str = Field(default="INFO")
     assets_dir: Path = Field(default=DEFAULT_ASSETS_DIR)
@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     # Rate limiting
     rate_limit_per_email_per_hour: int = Field(default=3)
     rate_limit_per_ip_per_hour: int = Field(default=10)
+    
+    # Shopify webhook settings
+    shopify_webhook_secret: str = Field(default="")
 
     model_config = SettingsConfigDict(
         env_prefix="TV_API_", 

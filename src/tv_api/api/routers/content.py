@@ -92,24 +92,6 @@ async def list_assets() -> dict[str, list[dict[str, object]]]:
     return {"items": items}
 
 
-@router.get("/{filename}", summary="Download an asset")
-async def download_asset(filename: str) -> FileResponse:
-    """Stream the requested file if it exists under the assets directory."""
-
-    root = _assets_root()
-    candidate = (root / Path(filename).name).resolve()
-    try:
-        candidate.relative_to(root)
-    except ValueError:  # pragma: no cover - defensive path traversal guard
-        raise HTTPException(status_code=404, detail="File not found") from None
-
-    if not candidate.is_file():
-        raise HTTPException(status_code=404, detail="File not found")
-
-    _logger.info("serving asset %s", candidate.name)
-    return FileResponse(candidate, media_type="application/octet-stream", filename=candidate.name)
-
-
 @router.get("/user", summary="Get user's content (public + private)")
 async def get_user_content(
     userId: Annotated[str, Query(description="User ID")],
@@ -414,3 +396,21 @@ async def upload_user_file(
             status_code=500,
             detail="Failed to upload file",
         )
+
+
+@router.get("/{filename}", summary="Download an asset")
+async def download_asset(filename: str) -> FileResponse:
+    """Stream the requested file if it exists under the assets directory."""
+
+    root = _assets_root()
+    candidate = (root / Path(filename).name).resolve()
+    try:
+        candidate.relative_to(root)
+    except ValueError:  # pragma: no cover - defensive path traversal guard
+        raise HTTPException(status_code=404, detail="File not found") from None
+
+    if not candidate.is_file():
+        raise HTTPException(status_code=404, detail="File not found")
+
+    _logger.info("serving asset %s", candidate.name)
+    return FileResponse(candidate, media_type="application/octet-stream", filename=candidate.name)

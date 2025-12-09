@@ -64,7 +64,7 @@ async def test_privacy_endpoint_returns_policy(api_client: AsyncClient) -> None:
     assert response.status_code == 200
     payload = response.json()
     assert "policy" in payload
-    assert payload["application"] == "PickleTV API"
+    assert payload["application"] == "dil.map"
 
 
 @pytest.mark.asyncio

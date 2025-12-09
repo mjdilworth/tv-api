@@ -78,3 +78,61 @@ to make a thumbnail from mp4 - the -ss is how many seconds in the grab the frame
 ```
 ffmpeg -ss 5 -i berlin.mp4 -vframes 1 -q:v 2 -vf "scale=640:-2" berlin-640.jpg
 ```
+
+## Asset upload
+
+to find out user id for email
+```
+psql -U tv_api_app -h localhost -d tv_dbase -c "SELECT user_id FROM tv_app.users WHERE email = 'mike@dilworth.uk';"
+```
+
+to add a user
+```
+psql -U tv_api_app -h localhost -d tv_dbase -c "INSERT INTO tv_app.users (user_id, email, display_name) VALUES ('7e1819bf-342c-468f-a8d3-0fdb39c8e1fe', 'mike@dilworth.uk', 'Mike') ON CONFLICT (email) DO NOTHING;"
+```
+7e1819bf-342c-468f-a8d3-0fdb39c8e1fe
+
+```
+```
+
+psql -U tv_api_app -h localhost -d tv_dbase -c "INSERT INTO tv_app.users (email, display_name) VALUES ('hello@lucindadilworth.com', 'hello') ON CONFLICT (email) DO NOTHING RETURNING user_id;"
+
+```
+
+
+- then upload files
+```
+curl -X 'POST' \
+  'https://tv.dilly.cloud/content/user/upload?userId=7e1819bf-342c-468f-a8d3-0fdb39c8e1fe' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@train-b0.mp4;type=video/mp4'
+
+curl -X 'POST' \
+  'https://tv.dilly.cloud/content/user/upload?userId=7e1819bf-342c-468f-a8d3-0fdb39c8e1fe' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@train-640.jpg'
+
+```
+
+- add it to users content
+
+
+```
+curl -X 'POST' \
+  'https://tv.dilly.cloud/content/user/create' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "user_id": "7e1819bf-342c-468f-a8d3-0fdb39c8e1fe",
+  "title": "Trains alive in Mallorca",
+  "description": "Bring train posters alive for visual experience in Mallorca",
+  "video_filename": "train-b0.mp4",
+  "thumbnail_filename": "train-640.jpg",
+  "duration_secs": 34,
+  "file_size_bytes": 187695104,
+  "is_public": false
+}'
+
+```

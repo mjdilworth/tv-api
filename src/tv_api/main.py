@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from tv_api.api.routers import auth, content, health, privacy, users
+from tv_api.api.routers import auth, content, health, privacy, shopify, users
 from tv_api.config import get_settings
 from tv_api.database import db
 from tv_api.logging import configure_logging
@@ -33,6 +33,7 @@ def create_application() -> FastAPI:
     app.include_router(auth.router)
     app.include_router(content.router)
     app.include_router(privacy.router)
+    app.include_router(shopify.router)
     app.include_router(users.router)
     return app
 
